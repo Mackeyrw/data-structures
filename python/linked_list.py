@@ -1,19 +1,49 @@
 class LinkList:
-  # write your __init__ method here that should store a 'head' value which the first Node in the LinkedList and a 'length' value which is the total number of Nodes in the LinkedList
+  def __init__(self, head=None):
+    self.head = head
+    self.length = 0
 
-  def add(self, data):
-    # write your code to ADD an element to the Linked List
-    pass
-
+  def add_node(self, data):
+    new_node = Node(data)
+    if self.head == None:
+        self.head = new_node
+    else:
+        current_node = self.head
+        while current_node.next_node:
+            current_node = current_node.next_node
+        current_node.next_node = new_node
+    
   def remove(self, data):
-    # write your code to REMOVE an element from the Linked List
-    pass
+    current_node = self.head
+    previous_node = None
+    if current_node.data == data:
+      self.head = current_node.next_node
+    else:
+      while current_node.data != data:
+        previous_node = current_node
+        current_node = current_node.next_node
+      previous_node.next_node = current_node.next_node
+    return self.head
+    
+  def get(self, data):
+    current_node = self.head
+    while current_node.data != data:
+      current_node = current_node.next_node
+    return current_node.data
 
-  def get(self, element_to_get):
-    # write you code to GET and return an element from the Linked List
-    pass
-
-# ----- Node ------
 class Node:
-  # store your DATA and NEXT values here
-  pass
+    def __init__(self, data=None, next_node=None):
+        self.data = data
+        self.next_node = next_node
+
+new_linked = LinkList()
+print(new_linked.head)
+new_linked.add_node(4)
+print(new_linked.head.data)
+new_linked.add_node(7)
+new_linked.add_node(9)
+new_linked.remove(4)
+print(new_linked.head.data)
+new_linked.add_node(5)
+new_linked.add_node(6)
+print(new_linked.get(5))

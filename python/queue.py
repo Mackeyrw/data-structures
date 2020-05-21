@@ -1,14 +1,31 @@
 class Queue:
-  # write your __init__ method here that should store a 'total' value which is the total number of elements in the Queue and a 'queue' value which is an array of stored values in the Queue
+  def __init__(self):
+    self.total = 0
+    self.queue = []
 
-  def enqueue(self):
-    # write your code to add data to the Queue following FIFO and return the Queue
-    pass
+  def enqueue(self, element):
+    self.queue.append(element)
+    self.total = len(self.queue)
+    return self.queue
 
   def dequeue(self, data):
-    # write your code to removes the data to the Queue following FIFO and return the Queue
-    pass
+    for i in range(self.total):
+      if self.queue[i] == data:
+        self.queue = self.queue[i+1:]
+        self.total = len(self.queue)
+        return self.queue
 
   def size(self):
-    # write your code that returns the size of the Queue
-    pass
+    return self.total
+
+queue = Queue()
+queue.enqueue(1)
+queue.enqueue(2)
+queue.enqueue(3)
+queue.enqueue(4)
+queue.enqueue(5)
+print(queue.queue)
+
+queue.dequeue(3)
+print(queue.queue)
+print(queue.total)
